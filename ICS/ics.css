@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: hsl(223, 19%, 93%);
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 526;
+  font-style: normal;
+  overflow-x: hidden;
+}
+
+.comment-container {
+  max-width: 1440px;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 50px;
+}
+
+.comment-contents {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 820px;
+  height: 180px;
+  background-color: hsl(0, 100%, 100%);
+  border-radius: 10px;
+}
+
+.replies-list {
+  border-left: 2px solid grey;
+  padding-left: 100px;
+}
+
+.first-score-icons {
+  margin-top: 30px;
+  margin-left: 29px;
+  border-radius: 15px;
+  height: 110px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: hsl(223, 19%, 93%);
+}
+
+.number {
+  color: hsl(238, 40%, 52%);
+}
+
+.second-contents-heading {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 88%;
+  gap: 15px;
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 40px;
+}
+
+.user-name {
+  color: hsl(206, 5%, 29%);
+}
+
+time {
+  color: rgb(126, 126, 134);
+}
+.content-user-heading {
+  display: flex;
+  justify-content: space-between;
+  width: 690px;
+}
+
+.reply-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reply-text {
+  color: hsl(238, 40%, 52%);
+}
+
+.comment-text {
+  width: 670px;
+  height: auto;
+  color: rgb(126, 126, 134);
+  line-height: 1.5;
+}
