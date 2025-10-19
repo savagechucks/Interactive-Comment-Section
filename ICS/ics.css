@@ -16,31 +16,79 @@ body {
   overflow-x: hidden;
 }
 
+.unpadded-comment {
+  width: 100%;
+}
+
 .comment-container {
   max-width: 1440px;
+  width: 870px;
+  padding-left: 1%;
   height: auto;
 }
 
 ul {
   list-style: none;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .comment-contents {
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
-  width: 820px;
+  width: 860px;
   height: 180px;
   background-color: hsl(0, 100%, 100%);
   border-radius: 10px;
 }
 
+/* when user is editing replys */
+.reply-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 860px;
+  height: 180px;
+  background-color: hsl(0, 100%, 100%);
+  border-radius: 10px;
+}
+
+.comment-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 763px;
+  height: 180px;
+  background-color: hsl(0, 100%, 100%);
+  border-radius: 10px;
+}
+
+.reply-block {
+  display: flex;
+  max-width: 1440px;
+  margin-top: 20px;
+  margin-left: 55px;
+}
+
+.vertical-line {
+  border: 1px solid gray;
+  width: 2px;
+  background-color: hsl(223, 19%, 93%);
+  height: 380px;
+}
+
 .replies-list {
-  border-left: 2px solid grey;
-  padding-left: 100px;
+  width: 100%;
+  padding-left: 0;
+}
+
+.replies-list li {
+  margin-left: 40px;
 }
 
 .first-score-icons {
@@ -79,6 +127,13 @@ ul {
   width: 40px;
 }
 
+/* user img for when they are typing replies */
+.user-reply-avatar {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 70px;
+}
+
 .user-name {
   color: hsl(206, 5%, 29%);
 }
@@ -89,7 +144,7 @@ time {
 .content-user-heading {
   display: flex;
   justify-content: space-between;
-  width: 690px;
+  width: 730px;
 }
 
 .reply-btn {
@@ -100,6 +155,27 @@ time {
 
 .reply-text {
   color: hsl(238, 40%, 52%);
+  padding: 7px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.send-btn {
+  color: hsl(238, 100%, 95%);
+  padding: 13px;
+  margin-bottom: 80px;
+  width: 100px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  border-radius: 5px;
+  background: hsl(238, 40%, 52%);
+  cursor: pointer;
 }
 
 .comment-text {
@@ -107,4 +183,41 @@ time {
   height: auto;
   color: rgb(126, 126, 134);
   line-height: 1.5;
+}
+
+#text-section {
+  width: 580px;
+  height: 130px;
+  border: 1px solid rgb(126, 126, 134);
+  border-radius: 7px;
+  padding: 20px;
+  color: rgb(126, 126, 134);
+  font-size: 18px;
+  font-weight: 576;
+  font-family: "Rubik", sans-serif;
+}
+
+.comment-card-text {
+  width: 600px;
+  height: auto;
+  color: rgb(126, 126, 134);
+  line-height: 1.5;
+}
+
+.content-user-card-heading {
+  display: flex;
+  justify-content: space-between;
+  width: 632px;
+}
+
+.reply-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reply-section-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
