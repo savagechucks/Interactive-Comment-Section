@@ -63,7 +63,8 @@ ul {
   justify-content: center;
   gap: 20px;
   width: 763px;
-  height: 180px;
+  min-height: 180px;
+  height: auto;
   background-color: hsl(0, 100%, 100%);
   border-radius: 10px;
 }
@@ -79,7 +80,7 @@ ul {
   border: 1px solid gray;
   width: 2px;
   background-color: hsl(223, 19%, 93%);
-  height: 380px;
+  height: auto;
 }
 
 .replies-list {
@@ -102,6 +103,15 @@ ul {
   align-items: center;
   justify-content: space-evenly;
   background-color: hsl(223, 19%, 93%);
+  /* cursor: pointer; */
+}
+
+.plus-icon {
+  cursor: pointer;
+}
+
+.minus {
+  cursor: pointer;
 }
 
 .number {
@@ -134,6 +144,13 @@ ul {
   margin-bottom: 70px;
 }
 
+.user-card-reply-avatar {
+   width: 50px;
+  height: 50px;
+  margin-bottom: 79px;
+  margin-left: 23px;
+}
+
 .user-name {
   color: hsl(206, 5%, 29%);
 }
@@ -164,6 +181,26 @@ time {
   cursor: pointer;
 }
 
+.reply-text:hover {
+  opacity: 0.4;
+  
+}
+
+.delete-text {
+  color: hsl(238, 40%, 52%);
+  padding: 7px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delete-text:hover {
+  opacity: 0.4;
+}
+
 .send-btn {
   color: hsl(238, 100%, 95%);
   padding: 13px;
@@ -178,6 +215,62 @@ time {
   cursor: pointer;
 }
 
+.send-btn:hover {
+  opacity: 0.4;
+}
+
+.current-reply-btn {
+  color: hsl(238, 100%, 95%);
+  padding: 13px;
+  margin-bottom: 80px;
+  width: 100px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  border-radius: 5px;
+  background: hsl(238, 40%, 52%);
+  cursor: pointer;
+}
+
+.current-reply-btn:hover {
+  opacity: 0.4;
+}
+
+.send-card-btn {
+  color: hsl(238, 100%, 95%);
+  padding: 15px;
+  margin-bottom: 80px;
+  margin-right: 22px;
+  width: 80px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  border-radius: 5px;
+  background: hsl(238, 40%, 52%);
+  cursor: pointer;
+}
+
+.current-reply-card-btn {
+  color: hsl(238, 100%, 95%);
+  padding: 15px;
+  margin-bottom: 80px;
+  margin-right: 22px;
+  width: 80px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  border-radius: 5px;
+  background: hsl(238, 40%, 52%);
+  cursor: pointer;
+}
+
+.current-reply-card-btn:hover {
+  opacity: 0.4;
+}
+
 .comment-text {
   width: 670px;
   height: auto;
@@ -188,13 +281,25 @@ time {
 #text-section {
   width: 580px;
   height: 130px;
-  border: 1px solid rgb(126, 126, 134);
-  border-radius: 7px;
-  padding: 20px;
+  border-radius: 10px;
+  padding: 10px;
   color: rgb(126, 126, 134);
   font-size: 18px;
   font-weight: 576;
   font-family: "Rubik", sans-serif;
+  resize: none;
+}
+
+#text-card-section {
+   width: 632px;
+  height: 130px;
+  border-radius: 10px;
+  padding: 10px;
+  color: rgb(126, 126, 134);
+  font-size: 18px;
+  font-weight: 576;
+  font-family: "Rubik", sans-serif;
+  resize: none;
 }
 
 .comment-card-text {
@@ -204,20 +309,69 @@ time {
   line-height: 1.5;
 }
 
+.update-btn {
+  color: hsl(238, 100%, 95%);
+  padding: 15px;
+  margin-bottom: 25px;
+  margin-right: 22px;
+  width: 95px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  border-radius: 5px;
+  background: hsl(238, 40%, 52%);
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  opacity: 0.4;
+}
+
 .content-user-card-heading {
   display: flex;
-  justify-content: space-between;
   width: 632px;
+  gap: 10px;
 }
 
 .reply-card-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .reply-section-content {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+
+}
+
+.edit-text {
+  color: hsl(238, 40%, 52%);
+  padding: 7px;
+  font-size: 18px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 526;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.edit-text:hover {
+  opacity: 0.4;
+}
+
+.edit-card-btn {
+  display: flex;
+  align-items: center;
+}
+
+.updateBtn {
+  display: flex;
+  justify-content: end;
 }
