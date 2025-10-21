@@ -54,6 +54,27 @@
         </li>
 
         <li>
+          <article class="reply-section">
+            <div class="reply-section-content">
+              <img
+                src="./images/avatars/image-juliusomo.png"
+                alt=""
+                class="user-reply-avatar"
+              />
+              <textarea
+                name=""
+                placeholder="Add a comment..."
+                id="text-section"
+                rows="30"
+                cols="50"
+              ></textarea>
+
+              <button class="current-reply-btn">REPLY</button>
+            </div>
+          </article>
+        </li>
+
+        <li>
           <article class="comment-contents">
             <div class="first-score-icons">
               <img src="./images/icon-plus.svg" alt="" class="plus-icon" />
@@ -144,6 +165,29 @@
               <ul class="replies-list">
                 <li>
                   <article class="comment-card is-reply">
+                    <div class="reply-section-content">
+                      <img
+                        src="./images/avatars/image-juliusomo.png"
+                        alt=""
+                        class="user-card-reply-avatar"
+                      />
+                      <textarea
+                        name=""
+                        placeholder="Add a comment..."
+                        id="text-section"
+                        rows="30"
+                        cols="50"
+                      ></textarea>
+
+                      <button class="current-reply-card-btn">REPLY</button>
+                    </div>
+                  </article>
+                </li>
+              </ul>
+
+              <ul class="replies-list">
+                <li>
+                  <article class="comment-card is-reply">
                     <div class="first-score-icons">
                       <img
                         src="./images/icon-plus.svg"
@@ -167,22 +211,34 @@
                           </p>
                         </div>
 
-                        <div class="reply-card-btn">
+                        <div class="delete-btn">
                           <img
-                            src="./images/icon-reply.svg"
+                            src="./images/icon-delete.svg"
+                            alt=""
+                            class="delete"
+                          />
+                          <button class="delete-text">Delete</button>
+                        </div>
+
+                        <div class="edit-card-btn">
+                          <img
+                            src="./images/icon-edit.svg"
                             alt=""
                             class="reply"
                           />
-                          <button class="reply-text">Reply</button>
+                          <button class="edit-text">Edit</button>
                         </div>
                       </div>
 
-                      <div class="comment-card-text">
-                        I couldn't agree more with this. Everything moves so
-                        fast and it always seems like everyone knows the newest
-                        library/framework. But the fundamentals are what stay
-                        constant.
-                      </div>
+                      <textarea
+                        name=""
+                        placeholder="Add a comment..."
+                        id="text-card-section"
+                        rows="30"
+                        cols="50"
+                      ></textarea>
+
+                      <div class="updateBtn"><button class="update-btn">UPDATE</button></div>
                     </div>
                   </article>
                 </li>
@@ -199,14 +255,13 @@
                 alt=""
                 class="user-reply-avatar"
               />
-              <div class="text-section">
-                <input
-                  type="text"
-                  name=""
-                  id="text-section"
-                  placeholder="Add a comment..."
-                />
-              </div>
+              <textarea
+                name=""
+                placeholder="Add a comment..."
+                id="text-section"
+                rows="30"
+                cols="50"
+              ></textarea>
 
               <button class="send-btn">SEND</button>
             </div>
