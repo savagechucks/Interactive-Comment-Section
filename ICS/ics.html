@@ -17,8 +17,8 @@
   <body>
     <section class="comment-container">
       <ul class="unpadded-comment">
-        <li>
-          <article class="comment-contents">
+        <!-- <li>
+          <article id="comment-box1" class="comment-contents">
             <div class="first-score-icons">
               <img src="./images/icon-plus.svg" alt="" class="plus-icon" />
               <p class="number">12</p>
@@ -40,7 +40,7 @@
 
                 <div class="reply-btn">
                   <img src="./images/icon-reply.svg" alt="" class="reply" />
-                  <button class="reply-text">Reply</button>
+                  <button id="reply-btn1" class="reply-text">Reply</button>
                 </div>
               </div>
 
@@ -51,10 +51,10 @@
               </div>
             </div>
           </article>
-        </li>
+        </li> -->
 
-        <li>
-          <article class="comment-contents">
+        <!-- <li>
+          <article id="comment-box2" class="comment-contents">
             <div class="first-score-icons">
               <img src="./images/icon-plus.svg" alt="" class="plus-icon" />
               <p class="number">5</p>
@@ -76,8 +76,7 @@
 
                 <div class="reply-btn">
                   <img src="./images/icon-reply.svg" alt="" class="reply" />
-                  <!-- <h3 class="reply-text">Reply</h3> -->
-                  <button class="reply-text">Reply</button>
+                  <button id="reply-btn2" class="reply-text">Reply</button>
                 </div>
               </div>
 
@@ -88,15 +87,14 @@
                 React? Thanks!
               </div>
             </div>
-          </article>
-          <!-- This UL container is what creates the visual indentation -->
+          </article> -->
           <div class="reply-block">
             <div class="vertical-line"></div>
 
             <div class="reply-list-ul">
               <ul class="replies-list">
-                <li>
-                  <article class="comment-card is-reply">
+                <!-- <li>
+                  <article id="reply-box1" class="comment-card">
                     <div class="first-score-icons">
                       <img
                         src="./images/icon-plus.svg"
@@ -126,7 +124,9 @@
                             alt=""
                             class="reply"
                           />
-                          <button class="reply-text">Reply</button>
+                          <button id="reply-btn3" class="reply-text">
+                            Reply
+                          </button>
                         </div>
                       </div>
 
@@ -139,11 +139,9 @@
                     </div>
                   </article>
                 </li>
-              </ul>
 
-              <ul class="replies-list">
                 <li>
-                  <article class="comment-card is-reply">
+                  <article id="reply-box2" class="comment-card is-reply">
                     <div class="first-score-icons">
                       <img
                         src="./images/icon-plus.svg"
@@ -173,7 +171,9 @@
                             alt=""
                             class="reply"
                           />
-                          <button class="reply-text">Reply</button>
+                          <button id="reply-btn4" class="reply-text">
+                            Reply
+                          </button>
                         </div>
                       </div>
 
@@ -185,34 +185,35 @@
                       </div>
                     </div>
                   </article>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
-        </li>
+        <!-- </li> -->
 
-        <li>
-          <article class="reply-section">
+        <!-- <li>
+          <article id="empty-reply-box" class="reply-section">
             <div class="reply-section-content">
               <img
                 src="./images/avatars/image-juliusomo.png"
                 alt=""
                 class="user-reply-avatar"
               />
-              <div class="text-section">
-                <input
-                  type="text"
-                  name=""
-                  id="text-section"
-                  placeholder="Add a comment..."
-                />
-              </div>
+              <textarea
+                name=""
+                placeholder="Add a comment..."
+                id="text-section"
+                rows="30"
+                cols="50"
+              ></textarea>
 
-              <button class="send-btn">SEND</button>
+              <button id="send-btn1" class="send-btn">SEND</button>
             </div>
           </article>
-        </li>
+        </li> -->
       </ul>
     </section>
+
+    <script src="./ics.js"></script>
   </body>
 </html>
