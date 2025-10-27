@@ -103,7 +103,7 @@ fetch("./data.json")
                             alt=""
                             class="reply"
                           />
-                          <button id="reply-btn3" class="reply-text">
+                          <button class="reply-text" data-comment-id="${reply.id}">
                             Reply
                           </button>
                         </div>
@@ -133,6 +133,10 @@ fetch("./data.json")
 
       commentsContainer.innerHTML += commentHTML;
     });
+// console.log("Comments added!");
+
+           
+   
 
     commentsContainer.innerHTML += `<li>
           <article id="empty-reply-box" class="reply-section">
@@ -155,4 +159,24 @@ fetch("./data.json")
           </article>
         </li>
      `;
+    
+        addReplyEventListeners();
+
+    
+    
+    function addReplyEventListeners() {
+      const replyButtons = document.querySelectorAll(".reply-text");
+
+      replyButtons.forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const commentID = e.currentTarget.dataset.commentId;
+          console.log("Comment ID", commentID);
+          
+        });
+      });
+    }
+   
   });
+
+
+ 
