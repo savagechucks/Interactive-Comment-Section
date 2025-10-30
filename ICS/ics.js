@@ -27,7 +27,7 @@ const sendBtnId1 = document.getElementById("send-btn1");
 // window.addEventListener("DOMContentLoaded", function () {
 
 // });
-
+// let   comm = 0
 fetch("./data.json")
   .then((Response) => Response.json())
   .then((data) => {
@@ -35,7 +35,7 @@ fetch("./data.json")
     commentsContainer.innerHTML = "";
     comments.forEach((comment) => {
       let commentHTML = ` <li>
-          <article id="reply-box1" class="comment-contents">
+          <article id="${comment.id}" class="comment-contents">
             <div class="first-score-icons">
               <img src="./images/icon-plus.svg" alt="" class="plus-icon" />
               <p class="number">${comment.score}</p>
@@ -57,7 +57,9 @@ fetch("./data.json")
 
                 <div class="reply-btn">
                   <img src="./images/icon-reply.svg" alt="" class="reply" />
-                  <button class="reply-text" data-comment-id="${comment.id}" >Reply</button>
+                  <button class="reply-text" data-comment-id="${
+                    comment.id
+                  }" >Reply</button>
                 </div>
               </div>
 
@@ -66,8 +68,12 @@ fetch("./data.json")
             </div>
           </article>
         </li>
-        `;
 
+
+        `;
+      
+      
+// check if any comment has a reply, if it does, create the comment reply.
       if (comment.replies.length > 0) {
         let allRepliesHTML = "";
 
@@ -116,12 +122,16 @@ fetch("./data.json")
                   </article>
                 </li>`;
           allRepliesHTML += repliesHTML;
-        });
+ 
 
+
+
+
+        });
+// Add the comment reply box to the comment depending on how many the comment has
         commentHTML += `
         <div class="reply-block">
             <div class="vertical-line"></div>
-
             <div class="reply-list-ul">
               <ul class="replies-list">
                 ${allRepliesHTML}
@@ -133,13 +143,12 @@ fetch("./data.json")
 
       commentsContainer.innerHTML += commentHTML;
     });
-// console.log("Comments added!");
 
            
    
-
+// Create the currentUser comment box
     commentsContainer.innerHTML += `<li>
-          <article id="empty-reply-box" class="reply-section">
+          <article id="empty-send-box" class="send-section">
             <div class="reply-section-content">
               <img
                 src="${data.currentUser.image.webp}"
@@ -163,15 +172,51 @@ fetch("./data.json")
         addReplyEventListeners();
 
     
-    
+    // function for the reply buttons for each comment.
     function addReplyEventListeners() {
       const replyButtons = document.querySelectorAll(".reply-text");
 
       replyButtons.forEach((button) => {
         button.addEventListener("click", function (e) {
-          const commentID = e.currentTarget.dataset.commentId;
-          console.log("Comment ID", commentID);
+          const existingReplyBox = document.querySelector('.reply-section');
           
+          if (existingReplyBox) {
+            existingReplyBox.remove();
+          }
+
+
+          const commentID = e.currentTarget.dataset.commentId;
+          // console.log(commentID);
+          
+          const commentArticle = document.getElementById(commentID);
+          // console.log(commentArticle);
+          
+          
+          // Create the reply box HTML here
+        const replyBoxHtml = `
+          <article class="reply-section">
+            <div class="reply-section-content">
+              <img
+                src="${data.currentUser.image.webp}"
+                alt=""
+                class="user-reply-avatar"
+              />
+              <textarea
+                name=""
+                placeholder="Add a comment..."
+                id="text-section"
+                rows="30"
+                cols="50"
+              ></textarea>
+
+              <button class="current-reply-btn">REPLY</button>
+            </div>
+          </article>
+        `;
+          
+            commentArticle.insertAdjacentHTML("afterend", replyBoxHtml);
+
+
         });
       });
     }
