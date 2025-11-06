@@ -12,6 +12,8 @@ const replyBoxId1 = document.getElementById("reply-box1");
 const replyBoxId2 = document.getElementById("reply-box2");
 
 // Reply empty boxes
+const existingReplyBox = document.querySelector(".reply-section");
+
 const emptyReplyBoxId = document.getElementById("empty-reply-box");
 
 // Variables holding the buttons: reply, delete, edit, send, update...
@@ -32,6 +34,44 @@ fetch("./data.json")
   .then((Response) => Response.json())
   .then((data) => {
     const comments = data.comments;
+
+    const savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+    savedReplies.forEach((item) => {
+      const parentComment = data.comments.find(
+        (c) => c.id == item.parentCommentId
+      );
+      if (parentComment) {
+        parentComment.replies.push(item.reply);
+      }
+    });
+
+    // save function
+    function saveReplyToStorage(newReply, parentCommentId) {
+      // save to localStorage
+      const savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+      savedReplies.push({
+        parentCommentId: parentCommentId,
+        reply: newReply,
+      });
+      localStorage.setItem("userReplies", JSON.stringify(savedReplies));
+
+      // Add to comment replies array in memory
+      let parentComment = data.comments.find((c) => c.id == parentCommentId);
+
+      if (!parentComment) {
+        parentComment = data.comments.find((comment) =>
+          comment.replies.some((r) => r.id == parentCommentId)
+        );
+      }
+
+
+      if (parentComment) {
+        parentComment.replies.push(newReply);
+      }
+
+      location.reload();
+    }
+
     commentsContainer.innerHTML = "";
     comments.forEach((comment) => {
       let commentHTML = ` <li>
@@ -57,9 +97,7 @@ fetch("./data.json")
 
                 <div class="reply-btn">
                   <img src="./images/icon-reply.svg" alt="" class="reply" />
-                  <button class="reply-text" data-comment-id="${
-                    comment.id
-                  }" >Reply</button>
+                  <button class="reply-text" data-comment-id="${comment.id}" >Reply</button>
                 </div>
               </div>
 
@@ -71,9 +109,8 @@ fetch("./data.json")
 
 
         `;
-      
-      
-// check if any comment has a reply, if it does, create the comment reply.
+
+      // check if any comment has a reply, if it does, create the comment reply.
       if (comment.replies.length > 0) {
         let allRepliesHTML = "";
 
@@ -122,13 +159,8 @@ fetch("./data.json")
                   </article>
                 </li>`;
           allRepliesHTML += repliesHTML;
- 
-
-
-
-
         });
-// Add the comment reply box to the comment depending on how many the comment has
+        // Add the comment reply box to the comment depending on how many the comment has
         commentHTML += `
         <div class="reply-block">
             <div class="vertical-line"></div>
@@ -144,9 +176,7 @@ fetch("./data.json")
       commentsContainer.innerHTML += commentHTML;
     });
 
-           
-   
-// Create the currentUser comment box
+    // Create the currentUser comment box
     commentsContainer.innerHTML += `<li>
           <article id="empty-send-box" class="send-section">
             <div class="reply-section-content">
@@ -168,32 +198,27 @@ fetch("./data.json")
           </article>
         </li>
      `;
-    
-        addReplyEventListeners();
 
-    
+    addReplyEventListeners();
+
     // function for the reply buttons for each comment.
     function addReplyEventListeners() {
       const replyButtons = document.querySelectorAll(".reply-text");
 
       replyButtons.forEach((button) => {
         button.addEventListener("click", function (e) {
-          const existingReplyBox = document.querySelector('.reply-section');
-          
           if (existingReplyBox) {
             existingReplyBox.remove();
           }
 
-
           const commentID = e.currentTarget.dataset.commentId;
-          // console.log(commentID);
-          
+          console.log(commentID);
+
           const commentArticle = document.getElementById(commentID);
           // console.log(commentArticle);
-          
-          
+
           // Create the reply box HTML here
-        const replyBoxHtml = `
+          const replyBoxHtml = `
           <article class="reply-section">
             <div class="reply-section-content">
               <img
@@ -205,23 +230,77 @@ fetch("./data.json")
                 name=""
                 placeholder="Add a comment..."
                 id="text-section"
+                class="reply-text-area"
                 rows="30"
                 cols="50"
               ></textarea>
 
-              <button class="current-reply-btn">REPLY</button>
+              <button class="current-reply-btn" data-comment-id="${commentID}">REPLY</button>
             </div>
           </article>
         `;
-          
-            commentArticle.insertAdjacentHTML("afterend", replyBoxHtml);
 
+          commentArticle.insertAdjacentHTML("afterend", replyBoxHtml);
 
+          const replyBtns = document.querySelector(".current-reply-btn");
+          replyBtns.addEventListener("click", function (e) {
+            // Get the text            
+            const textArea = document.getElementById("text-section");
+            let textValue = textArea.value;
+            const parentCommentId = e.currentTarget.dataset.commentId;
+
+            // console.log("Reply Text:", textValue);
+            // console.log("Replying to comment:", parentCommentId);
+
+            // Find the comment the user is trying to reply to
+            const parentComment = data.comments.find(
+              (c) => c.id == parentCommentId
+            );
+            // console.log(parentComment);
+            
+
+            // Get the username from that comment
+            let replyingToUsername = "";
+            // console.log(replyingToUsername);
+            
+            if (parentComment) {
+              replyingToUsername = parentComment.user.username;
+            } else {
+              data.comments.forEach((comment) => {
+                const foundReply = comment.replies.find(
+                  (r) => r.id == parentCommentId
+                );
+                console.log(foundReply);
+                
+                if (foundReply) {
+                  replyingToUsername = foundReply.user.username;
+                }
+              });
+            }
+
+            // When user adds reply.
+            const newReply = {
+              id: Date.now(),
+              content: textValue,
+              createdAt: "Just now",
+              score: 0,
+              replyingTo: replyingToUsername,
+              user: {
+                image: {
+                  png: data.currentUser.image.png,
+                  webp: data.currentUser.image.webp,
+                },
+                username: data.currentUser.username,
+              },
+            };
+
+            console.log(newReply);
+
+            textArea.value = "";
+
+            saveReplyToStorage(newReply, parentCommentId);
+          });
         });
       });
     }
-   
   });
-
-
- 
