@@ -349,6 +349,12 @@ time {
   gap: 10px;
 }
 
+
+.edit-delete-div {
+  display: flex;
+  align-items: center;
+}
+
 .reply-card-btn {
   display: flex;
   align-items: center;

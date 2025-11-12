@@ -48,7 +48,8 @@ fetch("./data.json")
     // save function
     function saveReplyToStorage(newReply, parentCommentId) {
       // save to localStorage
-      const savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+      const savedReplies =
+        JSON.parse(localStorage.getItem("userReplies")) || [];
       savedReplies.push({
         parentCommentId: parentCommentId,
         reply: newReply,
@@ -63,7 +64,6 @@ fetch("./data.json")
           comment.replies.some((r) => r.id == parentCommentId)
         );
       }
-
 
       if (parentComment) {
         parentComment.replies.push(newReply);
@@ -105,7 +105,7 @@ fetch("./data.json")
                 ${comment.content}
             </div>
           </article>
-        </li>
+        </li> 
 
 
         `;
@@ -115,7 +115,66 @@ fetch("./data.json")
         let allRepliesHTML = "";
 
         comment.replies.forEach((reply) => {
-          const repliesHTML = `<li>
+          let repliesHTML;
+
+          // Check if the reply is from the current user
+          // const isCurrentUser = reply.user.username === data.currentUser.username;
+          if (reply.user.username === data.currentUser.username) {
+            // Modify the repliesHTML to include delete and edit buttons
+            repliesHTML = `<li>
+                  <article id="${reply.id}" class="comment-card">
+                    <div class="first-score-icons">
+                      <img
+                        src="./images/icon-plus.svg"
+                        alt=""
+                        class="plus-icon"
+                      />
+                      <p class="number">${reply.score}</p>
+                      <img src="./images/icon-minus.svg" alt="" class="minus" />
+                    </div>
+                    <div class="second-contents-heading">
+                      <div class="content-user-card-heading">
+                        <div class="content-header">
+                          <img
+                            src="${reply.user.image.webp}"
+                            alt=""
+                            class="user-avatar"
+                          />
+                          <h3 class="user-name">${reply.user.username}</h3>
+                          <p class="timestamp">
+                            <time datetime="2025-09-16">${reply.createdAt}</time>
+                          </p>
+                        </div>
+
+                        <div class="edit-delete-div">
+                          <div class="delete-btn">
+                            <img
+                              src="./images/icon-delete.svg"
+                              alt=""
+                              class="delete"
+                            />
+                            <button class="delete-text">Delete</button>
+                          </div>
+
+                          <div class="edit-card-btn">
+                            <img
+                              src="./images/icon-edit.svg"
+                              alt=""
+                              class="reply"
+                            />
+                            <button class="edit-text">Edit</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="comment-card-text">
+                        ${reply.content}
+                      </div>
+                    </div>
+                  </article>
+                </li>`;
+          } else {
+            repliesHTML = `<li>
                   <article id="${reply.id}" class="comment-card">
                     <div class="first-score-icons">
                       <img
@@ -158,6 +217,8 @@ fetch("./data.json")
                     </div>
                   </article>
                 </li>`;
+          }
+
           allRepliesHTML += repliesHTML;
         });
         // Add the comment reply box to the comment depending on how many the comment has
@@ -244,7 +305,7 @@ fetch("./data.json")
 
           const replyBtns = document.querySelector(".current-reply-btn");
           replyBtns.addEventListener("click", function (e) {
-            // Get the text            
+            // Get the text
             const textArea = document.getElementById("text-section");
             let textValue = textArea.value;
             const parentCommentId = e.currentTarget.dataset.commentId;
@@ -257,12 +318,11 @@ fetch("./data.json")
               (c) => c.id == parentCommentId
             );
             // console.log(parentComment);
-            
 
             // Get the username from that comment
             let replyingToUsername = "";
             // console.log(replyingToUsername);
-            
+
             if (parentComment) {
               replyingToUsername = parentComment.user.username;
             } else {
@@ -271,7 +331,7 @@ fetch("./data.json")
                   (r) => r.id == parentCommentId
                 );
                 console.log(foundReply);
-                
+
                 if (foundReply) {
                   replyingToUsername = foundReply.user.username;
                 }
@@ -304,3 +364,49 @@ fetch("./data.json")
       });
     }
   });
+
+// Add event listeners for delete and edit buttons
+// setTimeout(() => {
+//   const deleteBtn = document.querySelector(`.delete-btn[data-reply-id="${reply.id}"]`);
+//   const editBtn = document.querySelector(`.edit-btn[data-reply-id="${reply.id}"]`);
+
+//   deleteBtn.addEventListener("click", function () {
+//     // Remove reply from localStorage
+//     let savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+//     savedReplies = savedReplies.filter(item => item.reply.id !== reply.id);
+//     localStorage.setItem("userReplies", JSON.stringify(savedReplies));
+
+//     // Reload the page to reflect changes
+//     location.reload();
+//   });
+
+//   editBtn.addEventListener("click", function () {
+//     const replyContentDiv = document.querySelector(`#${reply.id} .comment-card-text`);
+//     const originalContent = replyContentDiv.innerHTML;
+
+//     // Replace content with textarea for editing
+//     replyContentDiv.innerHTML = `
+//       <textarea class="edit-reply-textarea">${originalContent}</textarea>
+//       <button class="update-reply-btn" data-reply-id="${reply.id}">Update</button>
+//     `;
+
+//     // Add event listener for update button
+//     const updateBtn = replyContentDiv.querySelector(".update-reply-btn");
+//     updateBtn.addEventListener("click", function () {
+//       const updatedContent = replyContentDiv.querySelector(".edit-reply-textarea").value;
+
+//       // Update the reply in localStorage
+//       let savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+//       savedReplies = savedReplies.map(item => {
+//         if (item.reply.id === reply.id) {
+//           item.reply.content = updatedContent;
+//         }
+//         return item;
+//       });
+//       localStorage.setItem("userReplies", JSON.stringify(savedReplies));
+
+//       // Reload the page to reflect changes
+//       location.reload();
+//     });
+//   });
+// }, 0)
