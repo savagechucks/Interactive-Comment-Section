@@ -36,6 +36,7 @@ fetch("./data.json")
     const comments = data.comments;
 
     const savedReplies = JSON.parse(localStorage.getItem("userReplies")) || [];
+
     savedReplies.forEach((item) => {
       const parentComment = data.comments.find(
         (c) => c.id == item.parentCommentId
@@ -50,11 +51,12 @@ fetch("./data.json")
       // save to localStorage
       const savedReplies =
         JSON.parse(localStorage.getItem("userReplies")) || [];
-      savedReplies.push({
-        parentCommentId: parentCommentId,
-        reply: newReply,
-      });
-      localStorage.setItem("userReplies", JSON.stringify(savedReplies));
+
+      
+      
+      let actualParentCommentId = parentCommentId;
+
+      
 
       // Add to comment replies array in memory
       let parentComment = data.comments.find((c) => c.id == parentCommentId);
@@ -63,7 +65,17 @@ fetch("./data.json")
         parentComment = data.comments.find((comment) =>
           comment.replies.some((r) => r.id == parentCommentId)
         );
+        actualParentCommentId = parentComment
+          ? parentComment.id
+          : parentCommentId;
       }
+
+
+      savedReplies.push({
+        parentCommentId: actualParentCommentId,
+        reply: newReply,
+      });
+      localStorage.setItem("userReplies", JSON.stringify(savedReplies));
 
       if (parentComment) {
         parentComment.replies.push(newReply);
@@ -166,6 +178,8 @@ fetch("./data.json")
                           </div>
                         </div>
                       </div>
+                    
+
 
                       <div class="comment-card-text">
                         ${reply.content}
@@ -273,7 +287,7 @@ fetch("./data.json")
           }
 
           const commentID = e.currentTarget.dataset.commentId;
-          console.log(commentID);
+          // console.log(commentID);
 
           const commentArticle = document.getElementById(commentID);
           // console.log(commentArticle);
@@ -309,19 +323,17 @@ fetch("./data.json")
             const textArea = document.getElementById("text-section");
             let textValue = textArea.value;
             const parentCommentId = e.currentTarget.dataset.commentId;
-
-            // console.log("Reply Text:", textValue);
-            // console.log("Replying to comment:", parentCommentId);
+            console.log(parentCommentId);
 
             // Find the comment the user is trying to reply to
             const parentComment = data.comments.find(
               (c) => c.id == parentCommentId
             );
-            // console.log(parentComment);
+            console.log(parentComment);
 
             // Get the username from that comment
             let replyingToUsername = "";
-            // console.log(replyingToUsername);
+            console.log(replyingToUsername);
 
             if (parentComment) {
               replyingToUsername = parentComment.user.username;
